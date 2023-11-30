@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, request
 import requests
 from forecast import Forecast
+import os
 
 
 views = Blueprint(__name__, "views")                                                   
-key = '5bb5a99a036951f1cd3dd0529052f0e9'                                                         
+key = os.getenv('MY_API_KEY')                                                         
                                                                                                 
 @views.route("/")
 def home():
