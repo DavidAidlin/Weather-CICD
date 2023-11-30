@@ -1,2 +1,9 @@
 /nginx/key.pem
 /nginx/cert.pem
+/tf/my-aws-key
+/tf/my-aws-key.pub
+/tf/.terraform
+/tf/terraform.tfstate
+/tf/planoutput      
+/tf/.terraform.lock.hcl  
+/tf/terraform.tfstate.backup
