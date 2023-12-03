@@ -64,8 +64,12 @@ COPY . .
 RUN pip install -r requirements.txt
 CMD gunicorn --bind 0.0.0.0:5000 wsgi:app
 ```
-
+And here is the Nginx Dockerfile:
 ```
+FROM nginx:latest
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY cert.pem /etc/nginx/cert.pem
+COPY key.pem /etc/nginx/key.pem
 ```
 
 Then I Created an SSH key using
