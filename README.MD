@@ -1,6 +1,6 @@
 **CI-CD Python project**
 
-I engineered a DevOps-centric weather application in Python, leveraging Flask and Jinja2. The application interfaces with a weather service API, transforming the data into JSON for presentation. Utilizing Jinja2 for templating, it's hosted on a Gunicorn WSGI server, optimized for concurrent request handling. For enhanced security and performance, I implemented Nginx for SSL termination and content caching. The infrastructure is provisioned and managed using Terraform on AWS, with a comprehensive CI/CD pipeline set up through GitLab and Jenkins (master and agent), embodying best practices in DevOps.  
+I engineered a DevOps-centric weather application in Python, leveraging Flask and Jinja2. The application interfaces with a weather service API, transforming the data into JSON for presentation. Utilizing Jinja2 for templating, it's hosted on a Gunicorn WSGI server, optimized for concurrent request handling. For enhanced security and performance, I implemented Nginx for SSL termination and content caching. The infrastructure is provisioned and managed using Terraform on AWS, with a comprehensive CI/CD pipeline set up through GitLab and Jenkins (master and agent), embodying best practices in DevOps.      
 The specific configuration details for the Nginx server are as follows:
 
 ```
