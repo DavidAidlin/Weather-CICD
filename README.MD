@@ -281,7 +281,7 @@ stages {
    sudo apt install -y --no-install-recommends openjdk-17-jdk-headless
    ```  
 
-    - Created a user for jenkins:  
+- Created a user for jenkins:  
 
    ```
    sudo adduser --group --home /home/jenkins --shell /bin/bash jenkins
