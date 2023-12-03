@@ -368,6 +368,27 @@ if __name__ == "__main__":
 2. Reachability test for the a good input (City or Country)
 3. Reachability test for the Error page (bad input)
 - if the AssertionError do not raises then I store a value of 0  
-- Then based on the value of ENV variable I send a Slack notification to the relevant channel on Slack
+- Then based on the value of ENV variable I send a Slack notification to the relevant channel on Slack  
+
+- Based on the ENV variable I log in to Dockerhub (with the use of my docker hub credentials) and upload the image  
+- Then from the Agent I SSH into the deployment instance (using my private key with Jenkins credentials)  
+- Starting the following docker-compose file :  
+```
+version: "3"
+
+services:
+    app:
+      image: ban898/app:Gunicorn_And_Python
+      ports:
+        - "5000"
+
+    nginx:
+      image: ban898/app:Nginx
+      depends_on:
+        - app
+      ports:
+        - "80:8080"
+        - "443:443"
+```
 
 
