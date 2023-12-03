@@ -180,8 +180,55 @@ WantedBy=multi-user.target
    - Created a Job of type Pipeline 
    - In the Job Configuration I applied the URL of my GitLab repository
    - Configured the Job to trigger on push events from GitLab webhook 
-   - Configured the Job to serach for the JenkinsFile from the same repository
-   Here is the JenkinsFile:
+   - Configured the Job to serach for the JenkinsFile from the same repository. 
+
+**Then SSHed back to the GitLab Instance:**
+
+   - Using GitLab Integrations feature Created a webhook and provided the Jenkins Master URL 
+   - Tested the connection and approved it.
+
+**Then SSHed to the Jenkins Agent Instance:**
+
+   - Used the following commands:
+   ```
+   sudo apt-get update
+   sudo apt install -y --no-install-recommends openjdk-17-jdk-headless
+   ```  
+
+- Created a user for jenkins:  
+
+   ```
+   sudo adduser --group --home /home/jenkins --shell /bin/bash jenkins
+   ```
+    - Added required dependencies to the docker-ce repo and a GPG-key :
+   ```
+   sudo apt-get install ca-certificates curl gnupg lsb-release
+   sudo mkdir -p /etc/apt/keyrings
+   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+   echo \
+   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   ```
+    - Then installed updated and installed Docker-CE
+   ```
+   sudo apt-get update
+   sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+   ```
+    - Added the jenkins user to the relevant groups
+   ```
+   sudo usermod -aG docker jenkins
+   sudo usermod -aG sudo jenkins  
+   ```
+- In the Jenkins web UI navigated to manage nodes and cloud 
+- New Node -> Assigned it a Name  
+- Number of executors: Set how many executors will be available on the Node (Best practice is to set it equal to the number of CPU cores on the Agent)
+- Under Remote root directory I used /home/jenkins
+- Under the Label field I used Slave.
+- For the Usage now I chose Use this node as much as possible. 
+- I chose Launch agent by connecting it to the controller. That means that you will have to launch the agent on the node itself and that the agent will then connect to the controller  
+
+**Jenkinsfile**  
+- I used the following jenkinsfile :  
    ```
   agent {
     label 'slave'
@@ -266,50 +313,6 @@ stages {
     }
 }
 
-   ```
-
-**Then SSHed back to the GitLab Instance:**
-
-   - Using GitLab Integrations feature Created a webhook and provided the Jenkins Master URL 
-   - Tested the connection and approved it.
-
-**Then SSHed to the Jenkins Agent Instance:**
-
-   - Used the following commands:
-   ```
-   sudo apt-get update
-   sudo apt install -y --no-install-recommends openjdk-17-jdk-headless
    ```  
 
-- Created a user for jenkins:  
-
-   ```
-   sudo adduser --group --home /home/jenkins --shell /bin/bash jenkins
-   ```
-    - Added required dependencies to the docker-ce repo and a GPG-key :
-   ```
-   sudo apt-get install ca-certificates curl gnupg lsb-release
-   sudo mkdir -p /etc/apt/keyrings
-   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-   echo \
-   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-   ```
-    - Then installed updated and installed Docker-CE
-   ```
-   sudo apt-get update
-   sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-   ```
-    - Added the jenkins user to the relevant groups
-   ```
-   sudo usermod -aG docker jenkins
-   sudo usermod -aG sudo jenkins  
-   ```
-- In the Jenkins web UI navigated to manage nodes and cloud 
-- New Node -> Assigned it a Name  
-- Number of executors: Set how many executors will be available on the Node (Best practice is to set it equal to the number of CPU cores on the Agent)
-- Under Remote root directory I used /home/jenkins
-- Under the Label field I used Agent.
-- For the Usage now I chose Use this node as much as possible. 
-- I chose Launch agent by connecting it to the controller. That means that you will have to launch the agent on the node itself and that the agent will then connect to the controller
 
