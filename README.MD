@@ -304,12 +304,12 @@ stages {
    ```
    sudo usermod -aG docker jenkins
    sudo usermod -aG sudo jenkins  
-
-    - In the Jenkins web UI navigated to manage nodes and cloud 
-    - New Node -> Assigned it a Name  
-    - Number of executors: Set how many executors will be available on the Node (Best practice is to set it equal to the number of CPU cores on the Agent)
-    - Under Remote root directory I used /home/jenkins
-    - Under the Label field I used Agent.
-    - For the Usage now I chose Use this node as much as possible. 
-    - I chose Launch agent by connecting it to the controller. That means that you will have to launch the agent on the node itself and that the agent will then connect to the controller
+   ```
+- In the Jenkins web UI navigated to manage nodes and cloud 
+- New Node -> Assigned it a Name  
+- Number of executors: Set how many executors will be available on the Node (Best practice is to set it equal to the number of CPU cores on the Agent)
+- Under Remote root directory I used /home/jenkins
+- Under the Label field I used Agent.
+- For the Usage now I chose Use this node as much as possible. 
+- I chose Launch agent by connecting it to the controller. That means that you will have to launch the agent on the node itself and that the agent will then connect to the controller
 
