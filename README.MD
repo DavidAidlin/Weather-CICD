@@ -389,6 +389,7 @@ services:
       ports:
         - "80:8080"
         - "443:443"
-```
+```  
+**Thats it the weather web app is deployed and can be accessible to the users**
 
 
