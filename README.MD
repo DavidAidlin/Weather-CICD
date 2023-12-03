@@ -228,7 +228,7 @@ WantedBy=multi-user.target
 - I chose Launch agent by connecting it to the controller. That means that you will have to launch the agent on the node itself and that the agent will then connect to the controller  
 
 **Jenkinsfile**  
-- I used the following jenkinsfile :   
+I used the following jenkinsfile :   
 
    ```
   agent {
