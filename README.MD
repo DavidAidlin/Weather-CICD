@@ -231,12 +231,11 @@ WantedBy=multi-user.target
 - I used the following jenkinsfile :  
    ```
   agent {
-    label 'slave'
-}
-
+  	  label 'slave'
+	}
 environment {
     DOCKERHUB_CREDENTIALS = credentials('5529ce44-3db2-4dfb-a84e-1734c4102110')
-}
+	}
 
 stages {
     stage('SCM') {
