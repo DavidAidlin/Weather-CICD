@@ -140,3 +140,17 @@ Restart=no
 WantedBy=multi-user.target
 ```
 
+**Then I Created a Non-Root User and Repository:**
+
+   - Signed in to the root account on the EC2 GitLab instance.
+   - Created a non-root user.
+   - Approved the user and created a GitLab repository.
+   - Generated a Personal Access Token (PAT).
+   - Cloned the repository to my personal laptop using the following command:
+
+     ```bash
+     git clone http://44.201.4.72/ban898/project.git
+     ```
+
+   - Saved the cloned repository to a folder on my laptop.
+
