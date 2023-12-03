@@ -301,8 +301,8 @@ stages {
     - Added the jenkins user to the relevant groups
    ```
    sudo usermod -aG docker jenkins
-   sudo usermod -aG sudo jenkins
-   ```
+   sudo usermod -aG sudo jenkins  
+
     - In the Jenkins web UI navigated to manage nodes and cloud 
     - New Node -> Assigned it a Name  
     - Number of executors: Set how many executors will be available on the Node (Best practice is to set it equal to the number of CPU cores on the Agent)
