@@ -362,6 +362,12 @@ class TestingReachability(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-```
+```  
+- I test 3 test cases:  
+1. Reachability test for the homepage
+2. Reachability test for the a good input (City or Country)
+3. Reachability test for the Error page (bad input)
+- if the AssertionError do not raises then I store a value of 0  
+- Then based on the value of ENV variable I send a Slack notification to the relevant channel on Slack
 
 
