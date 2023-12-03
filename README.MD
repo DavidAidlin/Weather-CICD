@@ -313,5 +313,31 @@ stages {
 }
 
    ```  
+- Use the label of the agent to run the Job on the agent.  
+- SCM - pulled the repository to the agent, then using the following docker-compose file I started the Docker-compose file:  
+```
+version: "3"
+
+services:
+    app:
+      build:
+        context: app
+      image: ban898/app:Gunicorn_And_Python
+      ports:
+        - "5000"
+
+    nginx:
+      build:
+        context: nginx
+      image: ban898/app:Nginx
+      volumes:
+        - ./nginx/:/etc/nginx/:ro
+      depends_on:
+        - app
+      ports:
+        - "80:8080"
+        - "443:443"
+```  
+- 
 
 
