@@ -72,14 +72,15 @@ COPY cert.pem /etc/nginx/cert.pem
 COPY key.pem /etc/nginx/key.pem
 ```
 
-Then I Created an SSH key using
+Then I moved to create my infrastructure on AWS so I Created a local SSH key using
 ```
 ssh-keygen -t rsa -b 2048 -f my-aws-key
 ```
-Applied the terraform configuration files to create a VPC, IGW, Subnet, Route tables..
-Also created the relevant EC2 Instances for project [Gitlab, Jenkins Master, Jenkins Agent, Deployment]
+Applied the terraform configuration files to create VPC, IGW, Subnet, and Route tables...
+Also created the relevant EC2 Instances for the project [Gitlab, Jenkins Master, Jenkins Agent, Deployment]
 
 SSHed into the Gitlab Instance and applied the following script:
+To install Docker and add the relevant user as a user with the right permissions  
 ```
 sudo apt update
 sudo apt install apt-transport-https ca-certificates curl software-properties-common
@@ -95,5 +96,47 @@ docker --version
 
 ```
 
-To install Docker and add the relevant user as a user with the right permissions
+Then on the GitLab instance I just created I installed the following script :  
+Created a script to retrieve the public IP of the instance and assign it to the GitLab configuration file.
+```
+import requests
+import subprocess
+
+# Get the public IP of the EC2 instance
+response = requests.get('http://169.254.169.254/latest/meta-data/public-ipv4')
+public_ip = response.text
+
+# Command to modify the GitLab configuration file inside the container
+modify_config_cmd = [
+    'docker', 
+    'exec', 
+    'ubuntu_web_1', 
+    'sed', 
+    '-i', 
+    f's|^external_url.*$|external_url "http://{public_ip}/"|', 
+    '/etc/gitlab/gitlab.rb'
+]
+
+# Modify the GitLab configuration file inside the container
+subprocess.run(modify_config_cmd)
+
+# Restart the GitLab container for changes to take effect
+subprocess.run(['docker', 'restart', 'ubuntu_web_1'])
+
+print('GitLab configuration updated successfully.')
+```
+And I Created a systemd service called gitlab-config.service to run the script on boot.
+```
+[Unit]
+Description=Update GitLab Configuration
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /home/ubuntu/external_ip.py
+WorkingDirectory=/home/ubuntu
+Restart=no
+
+[Install]
+WantedBy=multi-user.target
+```
 
