@@ -314,7 +314,7 @@ stages {
 
    ```  
 ***Jenkinsfile Stages***
-- Use the label of the agent to run the Job on the agent.  
+- Used the label of the agent to run the Job on the agent.  
 - SCM - pulled the repository to the agent, then using the following docker-compose file I started the Docker-compose file:  
 ```
 version: "3"
@@ -339,6 +339,29 @@ services:
         - "80:8080"
         - "443:443"
 ```  
-- 
+- Then using env variables I stored the response status code of the following tests :  
+```
+import unittest
+import requests
+
+
+class TestingReachability(unittest.TestCase):
+
+    def test_homepage(self):
+        response = requests.get("https://127.0.0.1/", verify=False)
+        assert response.status_code == 200
+
+    def test_errorpage(self):
+        response = requests.get("https://127.0.0.1/error", verify=False)
+        assert response.status_code == 200
+
+    def test_citypage(self):
+        response = requests.get("https://127.0.0.1/getdata?city=Ashqelon", verify=False)
+        assert response.status_code == 200
+
+
+if __name__ == "__main__":
+    unittest.main()
+```
 
 
