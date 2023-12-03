@@ -228,7 +228,8 @@ WantedBy=multi-user.target
 - I chose Launch agent by connecting it to the controller. That means that you will have to launch the agent on the node itself and that the agent will then connect to the controller  
 
 **Jenkinsfile**  
-- I used the following jenkinsfile :  
+- I used the following jenkinsfile :   
+
    ```
   agent {
   	  label 'slave'
@@ -236,7 +237,6 @@ WantedBy=multi-user.target
 environment {
     DOCKERHUB_CREDENTIALS = credentials('5529ce44-3db2-4dfb-a84e-1734c4102110')
 	}
-
 stages {
     stage('SCM') {
         steps {
