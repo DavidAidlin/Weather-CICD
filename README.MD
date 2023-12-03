@@ -55,7 +55,7 @@ http {
 
 }
 ```
-the rest of the nginx files are encrypted so I didn't upload them.
+the rest of the nginx files are encrypted so I didn't upload them.  
 Here is the dockerfile for the final web app and installation and binding for the gunicron WSGI in the dockerfile :
 ```
 FROM python:3.9-slim
