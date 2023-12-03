@@ -146,7 +146,37 @@ WantedBy=multi-user.target
    - Created a non-root user.
    - Approved the user and created a GitLab repository.
    - Generated a Personal Access Token (PAT).
-   - Cloned the repository to my personal laptop using the following command:
+   - Cloned the repository to my laptop using the following command:
+
+     ```bash
+     git clone http://44.201.4.72/ban898/project.git
+     ```
+
+   - Saved the cloned repository to a folder on my laptop.
+
+**Then SSHed Created to the Jenkins Master Instance:**
+   - Installed Jenkins using the following commands :  
+   ```
+   sudo apt update
+   sudo apt install fontconfig openjdk-17-jre
+   java -version
+   openjdk version "17.0.8" 2023-07-18
+   OpenJDK Runtime Environment (build 17.0.8+7-Debian-1deb12u1)
+   OpenJDK 64-Bit Server VM (build 17.0.8+7-Debian-1deb12u1, mixed mode, sharing)
+   ```
+   ```
+   sudo systemctl enable jenkins  
+   sudo systemctl start jenkins
+   ```
+   - Browsed to http://localhost:8080 to unlock Jenkins
+   - then to retrieve the initial password I used the following command :
+   ```
+   sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+   ```
+   - Signed in to the root account on the EC2 Jenkins instance.
+   - Created a 
+   - Generated a Personal Access Token (PAT).
+   - Cloned the repository to my laptop using the following command:
 
      ```bash
      git clone http://44.201.4.72/ban898/project.git
