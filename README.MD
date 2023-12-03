@@ -1,8 +1,5 @@
-The application I created is python weather web app which I coded myself, using flask,jinja2 and python.
-The app include an API call to a free API weather service which I then retrive the relevant data i need and reformat it to JSON and output the answer,
-the app contains jinja2 template and WSGI web server (gunicorn), which is there to recive multiple requests from users and create a worker for each request,
-in front of the WSGI web server I configured a Nginx server which i added to it to enable ssl termination and static cache serving you can find the relevant configuration 
-for the nginx here :
+I developed a Python weather web application using Flask, Jinja2, and Python. This application features an API call to a complimentary weather service, from which I retrieve essential data, reformat it into JSON, and then present the results. The app employs Jinja2 templates and a Gunicorn WSGI web server, designed to handle multiple user requests simultaneously by creating a separate worker for each request. Additionally, I have configured a Nginx server in front of the WSGI server to facilitate SSL termination and static content caching. The specific configuration details for the Nginx server are as follows:
+
 ```
 user www-data;
 worker_processes auto;
