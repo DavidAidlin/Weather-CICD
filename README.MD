@@ -313,6 +313,7 @@ stages {
 }
 
    ```  
+***Jenkinsfile Stages***
 - Use the label of the agent to run the Job on the agent.  
 - SCM - pulled the repository to the agent, then using the following docker-compose file I started the Docker-compose file:  
 ```
