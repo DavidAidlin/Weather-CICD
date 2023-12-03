@@ -1,4 +1,7 @@
-I developed a Python weather web application using Flask, Jinja2, and Python. This application features an API call to a complimentary weather service, from which I retrieve essential data, reformat it into JSON, and then present the results. The app employs Jinja2 templates and a Gunicorn WSGI web server, designed to handle multiple user requests simultaneously by creating a separate worker for each request. Additionally, I have configured a Nginx server in front of the WSGI server to facilitate SSL termination and static content caching. The specific configuration details for the Nginx server are as follows:
+**CI-CD Python project**
+
+I engineered a DevOps-centric weather application in Python, leveraging Flask and Jinja2. The application interfaces with a weather service API, transforming the data into JSON for presentation. Utilizing Jinja2 for templating, it's hosted on a Gunicorn WSGI server, optimized for concurrent request handling. For enhanced security and performance, I implemented Nginx for SSL termination and content caching. The infrastructure is provisioned and managed using Terraform on AWS, with a comprehensive CI/CD pipeline set up through GitLab and Jenkins (master and agent), embodying best practices in DevOps.  
+The specific configuration details for the Nginx server are as follows:
 
 ```
 user www-data;
